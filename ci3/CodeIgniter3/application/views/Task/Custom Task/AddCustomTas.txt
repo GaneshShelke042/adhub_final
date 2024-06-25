@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
+
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/spectrum/1.7.1/spectrum.min.css">
+
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/jquery.perfect-scrollbar/0.6.7/css/perfect-scrollbar.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/spectrum/1.7.1/spectrum.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.perfect-scrollbar/0.6.7/js/min/perfect-scrollbar.jquery.min.js"></script>
+    <title>Client Permissions Form</title>
+    <style>
+        /* CSS to style all form elements */
+        .client-form {
+            max-width: 100%;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ffffff;
+            border-radius: 5px;
+            background-color: #ffffff;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+            flex-basis: calc(33.33% - 10px);
+        }
+
+        .additional-group {
+            margin-bottom: 15px;
+            flex-basis: calc(50% - 10px);
+        }
+
+        label {
+            display: inline-block;
+            width: 100%;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="search"],
+        select {
+            width: calc(100% - 20px);
+            /* Adjust the width according to label width */
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            /* Include padding and border in width */
+        }
+
+        input[type="checkbox"] {
+            margin-right: 5px;
+        }
+
+        input[type="submit"] {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        /* CSS to style form elements */
+        .task {
+            max-width: 100%;
+            margin: 0 auto;
+            padding: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
+            /* Adding shadow effect */
+        }
+
+        .form-group {
+            position: relative;
+
+            flex: 1 1 calc(30% - 10px);
+            margin-right: 10px;
+        }
+
+        .additional-group {
+            width: 32.60%;
+            flex: 1 1 calc(30% - 10px);
+            float: left;
+            margin-right: 10px;
+        }
+
+        .label-container {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        label {
+            /* display: block; */
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        input[type="text"],
+        input[type="date"],
+        .input-file {
+            width: calc(100% - 20px);
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+
+
+        .highlight {
+            border-color: #4CAF50;
+        }
+
+        .submit-button-container {
+            margin-bottom: 5%;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .submit-button,
+        .close-button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+
+        .close-button {
+            background-color: #f44336;
+        }
+
+        .submit-button:hover,
+        .close-button:hover {
+            background-color: #45a049;
+        }
+
+
+        .top-right-button {
+            position: absolute;
+            /* top: 10px; */
+            /* right: 10px; */
+            padding: 8px 16px;
+            background-color: #1a0876;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            top: 90px;
+            right: 3%;
+            margin-right: 20px;
+        }
+
+        .top-right-button:hover {
+            background-color: #45a049;
+        }
+
+      
+
+        .toolbar {
+            width: 100%;
+            margin: 0 auto 10px;
+        }
+
+      
+
+        #bold,
+        #italic,
+        #underline {
+            font-size: 18px;
+        }
+
+        #underline,
+        #align-right {
+            margin-right: 17px;
+        }
+
+        #align-left {
+            margin-left: 17px;
+        }
+
+        
+        #fonts {
+            width: 140px;
+        }
+
+        .sp-replacer {
+            background: #fcfcfc;
+            padding: 1px 2px 1px 3px;
+            border-radius: 3px;
+            border-color: #ffffff;
+            margin-top: -1px;
+        }
+
+        .sp-replacer:hover {
+            border-color: #a6a6a6;
+            color: inherit;
+        }
+
+        .sp-preview {
+            width: 15px;
+            height: 15px;
+            border: none;
+            margin-top: 2px;
+            margin-right: 3px;
+        }
+
+        .sp-preview-inner,
+        .sp-alpha-inner,
+        .sp-thumb-inner {
+            border-radius: 3px;
+        }
+
+        .editor {
+            position: relative;
+            width: 100%;
+            height: 50vh;
+            margin: 0 auto;
+            padding: 20px;
+            background: #ffffff;
+            border-radius: 3px;
+            box-shadow: inset 0 0 8px 1px rgba(0, 0, 0, .1);
+            box-sizing: border-box;
+            overflow: hidden;
+            word-break: break-all;
+            outline: none;
+        }
+
+        .attachment {
+            margin-top: 30px;
+            align-content: center;
+        }
+
+        .custom-file-upload {
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+        }
+
+        .custom-file-upload label {
+            padding: 10px 20px;
+            background-color: #e7e4e4;
+            color: rgb(8, 4, 4);
+            border-radius: 4px;
+            cursor: pointer;
+            display: block;
+            width: 300px;
+            /* Adjust width as needed */
+            height: 100px;
+            text-align: center;
+        }
+
+        .custom-file-upload label:hover {
+            background-color: #5873ec;
+        }
+
+        .custom-file-upload input[type="file"] {
+            display: none;
+        }
+
+        .home-section {
+            height: 100%;
+            margin-top: 1%;
+        }
+
+        a {
+            color: #ffff;
+        }
+
+        .box-container {
+            /* display: flex; */
+            /* justify-content: space-evenly;  */
+            /* align-items: center; */
+            flex-wrap: wrap;
+            gap: 10px;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 20px;
+            
+
+        }
+
+        .main-content {
+
+            /* margin: 0;
+            width: 100%;
+            margin: 20px auto;
+            margin-top: 0px; */
+            background-color: #efefef;
+            overflow: hidden;
+            padding: 40px 30px 30px 30px;
+        }
+
+        table,
+        th,
+        td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+
+        .task-item {
+            border: 1px solid #ccc;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            padding: 15px;
+            margin: 10px 0;
+            background-color: #fff;
+        }
+        .fetched-content {
+        background-color: #ffffff;
+        width: 100%;
+        height: 100%;
+        box-sizing: border-box;
+    }
+    #task-details {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        height: 100%;
+    }
+    #box-container {
+        width: 100%;
+        height: 100%;
+    }
+
+    </style>
+</head>
+
+<body>
+
+
+    <section class="home-section">
+
+        <div class="main-content" >
+            <h2>Add New Custom Task
+            </h2>
+            <button class="top-right-button">List</button>
+            <div class="box-container">
+
+                <form method="post" class="client-form">
+
+                    <div class="form-group">
+                        <label for="client-search">Client Name:</label>
+                        <input type="text" id="client-search" name="clientSearch" list="clients" placeholder="Search Client Name">
+                        <datalist id="clients">
+                            <?php
+                            if (!empty($clients)) {
+                                foreach ($clients as $client) {
+                                    if ($client['status'] == 1) {
+                                        echo '<option value="' . $client['owner_name'] . '">';
+                                    }
+                                }
+                            }
+                            ?>
+                        </datalist>
+                    </div>
+
+                    <div class="form-group">
+    <label for="category">Category:</label>
+    <select id="category" name="category" required>
+        <option value="All">All</option>
+        <?php if (!empty($result)) {
+            foreach ($result as $userData) {
+                if ($userData['status'] == 1) {
+                    echo '<option value="' . htmlspecialchars($userData['form']) . '">' . htmlspecialchars($userData['name']) . '</option>';
+                }
+            }
+        }
+        ?>
+    </select>
+</div>
+
+
+                    <div class="form-group">
+                        <label for="permissions">Permissions:</label>
+                        <select id="permissions" name="permissions" required onchange="toggleFields()">
+                            <option value="Select">Select</option>
+                            <option value="Default Team">Default Team</option>
+                            <option value="Select Team">Select Team</option>
+                        </select>
+                    </div>
+                   
+
+    <div id="task-details"></div>
+
+
+
+                    <div id="additionalFields" style="display: none;">
+
+                        <div class="additional-group">
+                            <label for="teamLeader">Team Leader:</label>
+                            <select id="teamLeader" name="teamLeader" required>
+                                <option value="Select">Select</option>
+                                <?php
+                                if (!empty($userResult)) {
+                                    foreach ($userResult as $userData) {
+                                        // Output each option with the value as ID and label as name from the database
+                                        if ($userData['role'] === 'Team Lead') {
+                                            if ($userData['status'] == 1) {
+                                                echo '<option value="' . $userData['id'] . '" ' . $selected . '>' . $userData['name'] . '</option>';
+                                            }
+                                        }
+                                    }
+                                }
+                                ?>
+                            </select>
+                        </div>
+
+
+                        <div class="additional-group">
+                            <label for="headCW">Head Content Writer:</label>
+                            <select id="headCW" name="headCW" required>
+                                <option value="Select">Select</option>
+                                <?php
+                                if (!empty($userResult)) {
+                                    foreach ($userResult as $userData) {
+                                        // Output each option with the value as ID and label as name from the database
+                                        if ($userData['role'] === 'Head Content Writer') {
+                                            if ($userData['status'] == 1) {
+                                                echo '<option value="' . $userData['id'] . '" ' . $selected . '>' . $userData['name'] . '</option>';
+                                            }
+                                        }
+                                    }
+                                }
+                                ?>
+                            </select>
+                        </div>
+                        <div class="additional-group">
+                            <label for="cw">Content Writer:</label>
+                            <select id="CW" name="CW" required>
+                                <option value="Select">Select</option>
+                                <?php
+                                if (!empty($userResult)) {
+                                    foreach ($userResult as $userData) {
+                                        // Output each option with the value as ID and label as name from the database
+                                        if ($userData['role'] === 'Content_Writer') {
+                                            if ($userData['status'] == 1) {
+                                                echo '<option value="' . $userData['id'] . '" ' . $selected . '>' . $userData['name'] . '</option>';
+                                            }
+                                        }
+                                    }
+                                }
+                                ?>
+                            </select>
+                        </div>
+                        <div class="additional-group" style="  float: right;">
+                            <label for="headGD">Head Graphics Designer:</label>
+                            <select id="headGD" name="headGD" required>
+                                <option value="Select">Select</option>
+                                <?php
+                                if (!empty($userResult)) {
+                                    foreach ($userResult as $userData) {
+                                        // Output each option with the value as ID and label as name from the database
+                                        if ($userData['role'] === 'Head Graphic designer') {
+                                            if ($userData['status'] == 1) {
+                                                echo '<option value="' . $userData['id'] . '" ' . $selected . '>' . $userData['name'] . '</option>';
+                                            }
+                                        }
+                                    }
+                                }
+                                ?>
+                            </select>
+                        </div>
+
+
+
+
+                        <div class="additional-group">
+                            <label for="GD">Graphics Designer:</label>
+                            <select id="GD" name="GD" required>
+                                <option value="Select">Select</option>
+                                <?php
+                                if (!empty($userResult)) {
+                                    foreach ($userResult as $userData) {
+                                        // Output each option with the value as ID and label as name from the database
+                                        if ($userData['role'] === 'Graphic_designer') {
+                                            if ($userData['status'] == 1) {
+                                                echo '<option value="' . $userData['id'] . '" ' . $selected . '>' . $userData['name'] . '</option>';
+                                            }
+                                        }
+                                    }
+                                }
+                                ?>
+                            </select>
+                        </div>
+
+
+                        <div class="additional-group" style="  float: right;">
+                            <label for="hSmm">Head Social Media Manager:</label>
+                            <select id="hSmm" name="hSmm" required>
+                                <option value="Select">Select</option>
+                                <?php
+                                if (!empty($userResult)) {
+                                    foreach ($userResult as $userData) {
+                                        // Output each option with the value as ID and label as name from the database
+                                        if ($userData['role'] === 'Head Social Media Manager') {
+                                            if ($userData['status'] == 1) {
+                                                echo '<option value="' . $userData['id'] . '" ' . $selected . '>' . $userData['name'] . '</option>';
+                                            }
+                                        }
+                                    }
+                                }
+                                ?>
+                            </select>
+                        </div>
+
+
+
+                        <div class="additional-group">
+                            <label for="smm">Social Media Manager:</label>
+                            <select id="smm" name="smm" required>
+                                <option value="Select">Select</option>
+                                <?php
+                                if (!empty($userResult)) {
+                                    foreach ($userResult as $userData) {
+                                        // Output each option with the value as ID and label as name from the database
+                                        if ($userData['role'] === 'Social Media Manager') {
+                                            if ($userData['status'] == 1) {
+                                                echo '<option value="' . $userData['id'] . '" ' . $selected . '>' . $userData['name'] . '</option>';
+                                            }
+                                        }
+                                    }
+                                }
+                                ?>
+                            </select>
+                        </div>
+                    </div>
+                        <div id="box-container" style="display:none; width: 100%;">
+                            <div id="task-details" style="width: 100%;"></div>
+                        </div>
+                    
+                </div>
+
+                   
+            </div>
+            </form>
+
+
+    </section>
+    <script>
+        $('#bold').on('click', function() {
+            document.execCommand('bold', false, null);
+        });
+
+        $('#italic').on('click', function() {
+            document.execCommand('italic', false, null);
+        });
+
+        $('#underline').on('click', function() {
+            document.execCommand('underline', false, null);
+        });
+
+        $('#align-left').on('click', function() {
+            document.execCommand('justifyLeft', false, null);
+        });
+
+        $('#align-center').on('click', function() {
+            document.execCommand('justifyCenter', false, null);
+        });
+
+        $('#align-right').on('click', function() {
+            document.execCommand('justifyRight', false, null);
+        });
+
+        $('#list-ul').on('click', function() {
+            document.execCommand('insertUnorderedList', false, null);
+        });
+
+        $('#list-ol').on('click', function() {
+            document.execCommand('insertOrderedList', false, null);
+        });
+
+        $('#fonts').on('change', function() {
+            var font = $(this).val();
+            document.execCommand('fontName', false, font);
+        });
+
+        $('#size').on('change', function() {
+            var size = $(this).val();
+            $('.editor').css('fontSize', size + 'px');
+        });
+
+        $('#color').spectrum({
+            color: '#000',
+            showPalette: true,
+            showInput: true,
+            showInitial: true,
+            showInput: true,
+            preferredFormat: "hex",
+            showButtons: false,
+            change: function(color) {
+                color = color.toHexString();
+                document.execCommand('foreColor', false, color);
+            }
+        });
+
+        $('.editor').perfectScrollbar();
+
+
+        // JavaScript code for other functionalities
+        $('#bold').on('click', function() {
+            document.execCommand('bold', false, null);
+        });
+
+
+
+
+        $(document).ready(function() {
+            $('#client-search').on('keyup', function() {
+                var searchText = $(this).val().toLowerCase();
+                $('#client-name option').each(function() {
+                    var optionText = $(this).text().toLowerCase();
+                    var match = optionText.indexOf(searchText) > -1;
+                    $(this).toggle(match);
+                });
+            });
+        });
+
+        function toggleFields() {
+            var permissionsSelect = document.getElementById("permissions");
+            var additionalFieldsDiv = document.getElementById("additionalFields");
+
+            if (permissionsSelect.value === "Select Team") {
+                additionalFieldsDiv.style.display = "block";
+            } else {
+                additionalFieldsDiv.style.display = "none";
+            }
+        }
+
+        document.getElementById('category').addEventListener('change', function() {
+        var boxContainer = document.getElementById('box-container');
+        var taskDetails = document.getElementById('task-details');
+        var selectedValue = this.value;
+
+        if (selectedValue !== 'All') {
+            // Construct the URL with the selected value
+            var url = baseUrl + selectedValue;
+
+            fetch(url)
+                .then(response => response.text())
+                .then(data => {
+                    boxContainer.style.display = '';
+                    taskDetails.innerHTML = '<div class="fetched-content">' + data + '</div>';
+                })
+                .catch(error => {
+                    console.error('Error fetching data:', error);
+                    taskDetails.innerHTML = 'An error occurred while fetching data.';
+                });
+        } else {
+            boxContainer.style.display = 'none';
+            taskDetails.innerHTML = ''; // Clear the task details if "All" is selected
+        }
+    });
+
+    const baseUrl = 'http://localhost/adhub/ci3/CodeIgniter3/index.php/CustomTaskContro/addQuestion/';
+
+    </script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</body>
+
+</html>
